@@ -1,4 +1,3 @@
-
 { A Very Simple File Management Application for the completion of requirements for                 }
 { the subject ITCOMS014 Lecture for the course of Bachelor of Science in Information Technology.   }
 
@@ -54,7 +53,7 @@ Begin
 	LongHorizontalLine();
 	Write(#9559);
 	Write(#9553 + '                                                                              ' + #9553);
-	Write(#9553 + ' * Hi, you are using the Copy Pasta application made by the KDT-2 group ' + #9829 + '     ' + #9553);
+	Write(#9553 + ' * Hi, you are using the Copy Pasta application made by RM Dela Cruz ' + #9829 + '        ' + #9553);
 	Write(#9553 + '                                                                              ' + #9553);
 	Write(#9553 + ' * You can type an option from the following or not :                         ' + #9553);
 	Write(#9553 + '                                                                              ' + #9553);
@@ -79,6 +78,7 @@ Begin
 	WriteLn;
 		
 		{ This catches the commands thrown by the user }
+		{ Copy }
 		if (option = 'copy') then
 		begin
 			WriteLn;
@@ -91,16 +91,13 @@ Begin
 			WriteLn(' Enter the file destination (Where do you want me to throw it?) :');
 			Write(' > ');
 			ReadLn(fileDestination);
-			
-			try
-			begin
-				{ Copy File Handling Codes }
-				sourceFile := TFileStream.Create(fileSource, fmOpenRead);
-				destinationFile := TFileStream.Create(fileDestination, fmCreate);
-				destinationFile.CopyFrom(sourceFile, sourceFile.Size);
-				sourceFile.Free;
-				destinationFile.Free;
-			end
+
+			{ Copy File Handling Codes }
+			sourceFile := TFileStream.Create(fileSource, fmOpenRead);
+			destinationFile := TFileStream.Create(fileDestination, fmCreate);
+			destinationFile.CopyFrom(sourceFile, sourceFile.Size);
+			sourceFile.Free;
+			destinationFile.Free;
 			
 			{ Dialog Box / Prompt Box }
 			WriteLn;
@@ -109,9 +106,109 @@ Begin
 			Write(#9559);
 			Write(#9553 + '                                                                              ' + #9553);
 			Write(#9553 + ' * (The application threw your file in the Recycle Bin.)                      ' + #9553);
+			Write(#9553 + '                                                                              ' + #9553);
 			Write(#9553 + ' * File copying failed ...                                                    ' + #9553);
-			Write(#9553 + ' * Just Kidding ;)                                                            ' + #9553); 
+			Write(#9553 + '                                                                              ' + #9553);
+			Write(#9553 + ' * Just Kidding ;)                                                            ' + #9553);
+			Write(#9553 + '                                                                              ' + #9553); 
 			Write(#9553 + ' * File copying just finished. probably.                                      ' + #9553);
+			Write(#9553 + '                                                                              ' + #9553);
+			Write(#9562);
+			LongHorizontalLine();
+			Write(#9565);
+			WriteLn;
+			askAgain := false;
+			monolouge := 0;
+		end
+		
+		{ Move }
+		else if (option = 'move') then
+		begin
+			WriteLn;
+			WriteLn(' * Oh we are moving something, slide it in ~');
+			WriteLn;
+			WriteLn(' Now Enter salsa (file source) :');
+			Write(' > ');
+			ReadLn(fileSource);
+			WriteLn;
+			WriteLn(' Enter the file destination (Where the cutouts will be kept) :');
+			Write(' > ');
+			ReadLn(fileDestination);
+
+			{ Move File Handling Codes }
+			sourceFile := TFileStream.Create(fileSource, fmOpenRead);
+			destinationFile := TFileStream.Create(fileDestination, fmCreate);
+			destinationFile.CopyFrom(sourceFile, sourceFile.Size);
+			sourceFile.Free;
+			destinationFile.Free;
+			DeleteFile(fileSource);
+			
+			{ Dialog Box / Prompt Box }
+			WriteLn;
+			Write(#9556);
+			LongHorizontalLine();
+			Write(#9559);
+			Write(#9553 + '                                                                              ' + #9553);
+			Write(#9553 + ' * (The application sliced your file into pieces.)                            ' + #9553);
+			Write(#9553 + '                                                                              ' + #9553);
+			Write(#9553 + ' * A file fragment flew away ...                                              ' + #9553);
+			Write(#9553 + '                                                                              ' + #9553);
+			Write(#9553 + ' * Moving finished. With an file integrity error - omg                        ' + #9553);
+			Write(#9553 + '                                                                              ' + #9553); 
+			Write(#9553 + ' * Operation almost got failed .. but you found the missing bits.             ' + #9553);
+			Write(#9553 + '                                                                              ' + #9553);
+			Write(#9553 + ' * Finishing operation ... your file was successfuly moved.                   ' + #9553);
+			Write(#9553 + '                                                                              ' + #9553);
+			Write(#9562);
+			LongHorizontalLine();
+			Write(#9565);
+			WriteLn;
+			askAgain := false;
+			monolouge := 0;
+		end
+		
+		{ Delete }
+		else if (option = 'delete') then
+		begin
+			WriteLn;
+			WriteLn(' * Oh boi, are you serious? just kidding go on..');
+			WriteLn;
+			WriteLn(' Now Enter salsa to be fed to the great doggo (file to be killed / deleted) :');
+			Write(' > ');
+			ReadLn(fileSource);
+			WriteLn;
+			WriteLn(' * Do you really want to delete this file? There is no turning back after this.      [yes] or [no]?');
+			Write(' > ');
+			ReadLn(option);
+			WriteLn;
+			If (option = 'yes') then
+			begin
+				DeleteFile(fileSource);
+			end
+			else if (option = 'no') then
+			begin
+				WriteLn(' * You changed your mind.');
+			end
+			else 
+			begin
+				WriteLn(' * A tactical way to escape ... spamming key(s)');
+			end;
+			
+			{ Dialog Box / Prompt Box }
+			WriteLn;
+			Write(#9556);
+			LongHorizontalLine();
+			Write(#9559);
+			Write(#9553 + '                                                                              ' + #9553);
+			Write(#9553 + ' * (The application fed your file to the great doggo)                         ' + #9553);
+			Write(#9553 + '                                                                              ' + #9553);
+			Write(#9553 + ' * It seemed to be happy with the file he just ate..                          ' + #9553);
+			Write(#9553 + '                                                                              ' + #9553);
+			Write(#9553 + ' * The great doggo is now digesting your file.                                ' + #9553);
+			Write(#9553 + '                                                                              ' + #9553); 
+			Write(#9553 + ' * Allau Ahkbar! the file was successfuly deleted.                            ' + #9553);
+			Write(#9553 + '                                                                              ' + #9553);
+			Write(#9553 + ' * Finishing operation ... your file was successfuly ... fed.                 ' + #9553);
 			Write(#9553 + '                                                                              ' + #9553);
 			Write(#9562);
 			LongHorizontalLine();
@@ -157,6 +254,7 @@ Begin
 				monolouge := 0;
 				askAgain := false;
 			end;
+			
 			Inc(monolouge, 1);
 			Write(#9553 + '                                                                              ' + #9553);
 			Write(#9562);
