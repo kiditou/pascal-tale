@@ -5,12 +5,16 @@
 { Email: kiritoneesan@gmail.com                                                                    }
 { Facebook: kiditouKun                                                                             }
 { Twitter: @kiditouKun                                                                             }
+{ Github: kiditou                                                                                  }
+{ StackOverflow: kiditou                                                                           }
 
 { Application's design was inspired by UNDERTALE, a game by Toby Fox *bark* *bark*                 }
 { Compiled Using Free Pascal Compiler from *www.freepascal.org*                                    }
 
-{ Obiously, the application's "Program" header or whatever you call it }
+{ Obiously, the application's "Program" header or whatever you call it ouo }
 Program FileHandling;
+{ This is for the try ... except code     }
+{ I think of it as a 'uses' directive ouo }
 {$MODE OBJFPC}
 
 { Uses Directive }
@@ -29,14 +33,72 @@ Var
 	{ The boolean variable for the loop }
 	askAgain : boolean;
 
+{ Next is the procedures, the pieces of code that will be reused }
+{ all the time in this filfty application.                       }	
+	
+{ Just your ol' horizontal line,          }
+{ this acts as box dividers I think?      }
+{ just kidding this is the box's borders  }
+{ I'm just messing with you, you know :^) }
 Procedure LongHorizontalLine();
 begin
+
+	{ You'll be seeing a lot of this emulated for loops or not, it is a procedure anyways. }
+	{ This is for the long horizontal line which encloses the system texts (doggo barks)   }
+	{ so that it looks like a dialog box from the famous game UNDERTALE                    }
 	line:= 0;
 	while line <= 77 do
 		begin
 			Write(#9552);
 			Inc(line, 1);
 		end;
+end;
+
+{ This procedure will be used in case something bad happened }
+{ e.g. user is stupid enough to type wrong inpus, who knows? }
+{ they might be pretending owo ...                           }
+Procedure OnError();
+begin
+	{ Dialog Box / Prompt Box in case of error(s) }
+	WriteLn;
+	Write(#9556);
+	LongHorizontalLine();
+	Write(#9559);
+	Write(#9553 + '                                                                              ' + #9553);
+	Write(#9553 + ' * Error code 6.9, user brain not found.                                      ' + #9553);
+	Write(#9553 + '                                                                              ' + #9553);
+	Write(#9553 + ' * File copying failed ... real.. bad.                                        ' + #9553);
+	Write(#9553 + '                                                                              ' + #9553);
+	Write(#9553 + ' * You should review your inputs                                              ' + #9553);
+	Write(#9553 + '                                                                              ' + #9553); 
+	Write(#9553 + ' * File copying just finished. sadly.                                         ' + #9553);
+	Write(#9553 + '                                                                              ' + #9553);
+	Write(#9562);
+	LongHorizontalLine();
+	Write(#9565);
+	WriteLn;
+	WriteLn;
+	Write(#9556);
+	LongHorizontalLine();
+	Write(#9559);
+	Write(#9553 + '                                                                              ' + #9553);
+	Write(#9553 + ' * Hi, you are still using the Copy Pasta application made by RM Dela Cruz ' + #9829 + '  ' + #9553);
+	Write(#9553 + '                                                                              ' + #9553);
+	Write(#9553 + ' * The application just recovered from an error.                              ' + #9553);
+	Write(#9553 + '                                                                              ' + #9553);
+	Write(#9553 + ' * Again, you can type an option from the following or not :                  ' + #9553);
+	Write(#9553 + '                                                                              ' + #9553);
+	Write(#9553 + '      [copy] to copy a file                                                   ' + #9553);
+	Write(#9553 + '      [move] to move a .. file                                                ' + #9553);
+	Write(#9553 + '      [edit] to edit ... a text file                                          ' + #9553);
+	Write(#9553 + '      [delete] of course to delete your ... file                              ' + #9553);
+	Write(#9553 + '                                                                              ' + #9553);
+	Write(#9553 + '      [help] type it if you need help. Read or you' + #39 + 'll have a bad time         ' + #9553);
+	Write(#9553 + '                                                                              ' + #9553);
+	Write(#9562);
+	LongHorizontalLine();
+	Write(#9565);
+	WriteLn;
 end;
 	
 { Start of the application's code }
@@ -47,9 +109,6 @@ Begin
 	
 	{ The welcome screen is too old. Say hi to the 'Hi!' screen! }
 	Write(#9556);
-	{ You'll be seeing a lot of this emulated for loops                  }
-	{ it is for the long horizontal line which encloses the system texts }
-	{ so that it looks like a dialog box from the famous game UNDERTALE  }
 	LongHorizontalLine();
 	Write(#9559);
 	Write(#9553 + '                                                                              ' + #9553);
@@ -65,7 +124,6 @@ Begin
 	Write(#9553 + '      [help] type it if you need help. Read or you' + #39 + 'll have a bad time         ' + #9553);
 	Write(#9553 + '                                                                              ' + #9553);
 	Write(#9562);
-	{ Another loooooong horizontal line, I don't know if you get me but, if you do thanks, if not .. go study faggot }
 	LongHorizontalLine();
 	Write(#9565);
 	WriteLn;
@@ -73,10 +131,10 @@ Begin
 	{ Loop start here, it keeps prompting the user until a correct code was written }
 	while askAgain = true do
 	begin
-	Write(' > ');
-	ReadLn(option);
-	WriteLn;
-		
+		Write(' > ');
+		ReadLn(option);
+		WriteLn;
+			
 		{ This catches the commands thrown by the user }
 		{ Copy }
 		if (option = 'copy') then
@@ -91,34 +149,40 @@ Begin
 			WriteLn(' Enter the file destination (Where do you want me to throw it?) :');
 			Write(' > ');
 			ReadLn(fileDestination);
-
-			{ Copy File Handling Codes }
-			sourceFile := TFileStream.Create(fileSource, fmOpenRead);
-			destinationFile := TFileStream.Create(fileDestination, fmCreate);
-			destinationFile.CopyFrom(sourceFile, sourceFile.Size);
-			sourceFile.Free;
-			destinationFile.Free;
 			
-			{ Dialog Box / Prompt Box }
-			WriteLn;
-			Write(#9556);
-			LongHorizontalLine();
-			Write(#9559);
-			Write(#9553 + '                                                                              ' + #9553);
-			Write(#9553 + ' * (The application threw your file in the Recycle Bin.)                      ' + #9553);
-			Write(#9553 + '                                                                              ' + #9553);
-			Write(#9553 + ' * File copying failed ...                                                    ' + #9553);
-			Write(#9553 + '                                                                              ' + #9553);
-			Write(#9553 + ' * Just Kidding ;)                                                            ' + #9553);
-			Write(#9553 + '                                                                              ' + #9553); 
-			Write(#9553 + ' * File copying just finished. probably.                                      ' + #9553);
-			Write(#9553 + '                                                                              ' + #9553);
-			Write(#9562);
-			LongHorizontalLine();
-			Write(#9565);
-			WriteLn;
-			askAgain := false;
-			monolouge := 0;
+			{ Copy File Handling Codes }
+			try
+			begin
+				sourceFile := TFileStream.Create(fileSource, fmOpenRead);
+				destinationFile := TFileStream.Create(fileDestination, fmCreate);
+				destinationFile.CopyFrom(sourceFile, sourceFile.Size);
+				sourceFile.Free;
+				destinationFile.Free;
+				
+				WriteLn;
+				Write(#9556);
+				LongHorizontalLine();
+				Write(#9559);
+				Write(#9553 + '                                                                              ' + #9553);
+				Write(#9553 + ' * (The application threw your file in the Recycle Bin.)                      ' + #9553);
+				Write(#9553 + '                                                                              ' + #9553);
+				Write(#9553 + ' * File copying failed ...                                                    ' + #9553);
+				Write(#9553 + '                                                                              ' + #9553);
+				Write(#9553 + ' * Just Kidding ;)                                                            ' + #9553);
+				Write(#9553 + '                                                                              ' + #9553); 
+				Write(#9553 + ' * File copying just finished. probably.                                      ' + #9553);
+				Write(#9553 + '                                                                              ' + #9553);
+				Write(#9562);
+				LongHorizontalLine();
+				Write(#9565);
+				WriteLn;
+				askAgain := false;
+				monolouge := 0;			
+			end
+			
+			except on exception do
+				OnError();
+			end;
 		end
 		
 		{ Move }
